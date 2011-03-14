@@ -1,0 +1,16 @@
+<% form_for([ @patient, @appointment]) do |f| %>
+  
+  <p>
+    <%= f.label "Appointment Date" %><br />
+	<%= f.text_field :appt_dt %>
+  </p>
+  <p>
+    <%= f.label "Appointment Location" %><br />
+    <%= f.text_field :appt_loc %>
+  </p>
+  <p>
+    <%= f.label "Physician" %><br />
+    <%= f.collection_select :physician_id, Physician.all, :id, :name, :size => 5, :class => "select" %>
+  </p>
+    <%= submit_tag "Submit" %>
+<%  end %>

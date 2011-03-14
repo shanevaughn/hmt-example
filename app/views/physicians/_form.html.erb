@@ -1,0 +1,44 @@
+<%= form_for(@physician) do |p| %>
+  <% if @physician.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@physician.errors.count, "error") %> prohibited this physician from being saved:</h2>
+
+      <ul>
+      <% @physician.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= p.label :name %><br />
+    <%= p.text_field :name %>
+  </div>
+
+<hr>
+<h4>Appointments</h4>
+<table>
+		<% index = 0 %>
+		<%= p.fields_for :appointments do |a| %>
+			<tr>
+				<td>
+					<%= @physician.appointments[index].patient.name %> 
+				</td>
+				<td><%= @physician.appointments[index].appt_dt %> </td>
+				<td><%= @physician.appointments[index].appt_loc %> </td>
+				<td><%= a.check_box :_destroy %><%= a.label :_destroy, "Remove" %></td>
+			</tr>
+			<% index = index + 1 %>
+		<% end %>
+</table>
+
+# this doesn't work with a "New" action
+<%= link_to 'Add a new appointment', new_physician_appointment_path(@physician) %>
+<hr>
+  <div class="actions">
+    <%= p.submit %>
+  </div>
+<% end %>
+
+

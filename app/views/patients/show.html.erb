@@ -1,0 +1,25 @@
+<p>
+  <b>Name:</b>
+  <%= @patient.name %>
+</p>
+
+
+
+
+<hr>
+<h4>Appointments</h4>
+<table>
+	<tr>
+		<th>Physician</th>
+		<th>Appointment Date</th>
+		<th>Appointment Location</th>
+		<th></th>
+	</tr>
+<%= render @patient.appointments %>
+
+</table>
+<%= link_to 'Add a new appointment', new_patient_appointment_path(@patient) %>
+<hr>
+
+<%= link_to 'Edit', edit_patient_path(@patient) %> |
+<%= link_to 'Back', patients_path %>

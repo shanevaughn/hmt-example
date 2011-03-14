@@ -1,0 +1,48 @@
+<%= form_for(@patient) do |p| %>
+  <% if @patient.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@patient.errors.count, "error") %> prohibited this patient from being saved:</h2>
+
+      <ul>
+      <% @patient.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= p.label :name %><br />
+    <%= p.text_field :name %>
+  </div>
+
+<hr>
+<h4>Appointments</h4>
+<table>
+	<tr>
+		<th>Physician</th>
+		<th>Appointment Date</th>
+		<th>Appointment Location</th>
+		<th></th>
+	</tr>
+		<% index = 0 %>
+		<%= p.fields_for :appointments do |a| %>
+			<tr>
+				<td>
+					<%= @patient.appointments[index].physician.name %> 
+				</td>
+				<td><%= a.text_field :appt_dt %></td>
+				<td><%= a.text_field :appt_loc %></td>
+				<td><%= a.check_box :_destroy %><%= a.label :_destroy, "Remove" %></td>
+			</tr>
+			<% index = index + 1 %>
+		<% end %>
+</table>
+<%= link_to 'Add a new appointment', new_patient_appointment_path(@patient) %>
+<hr>
+  <div class="actions">
+    <%= p.submit %>
+  </div>
+<% end %>
+
+

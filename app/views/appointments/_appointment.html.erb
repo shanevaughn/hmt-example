@@ -1,0 +1,14 @@
+<tr>
+	<td>
+		<%= appointment.physician.name %> 
+	</td>
+	<td><%= appointment.appt_dt.to_formatted_s(:short) %></td>
+	<td><%= appointment.appt_loc %></td>
+	<td><%= link_to 'edit', edit_patient_appointment_path(appointment.patient, appointment) %> |
+  <%= link_to 'destroy', patient_appointment_path(appointment.patient, appointment), :confirm => "Are you sure?", :method => :delete %></td>
+</tr>
+
+
+
+
+
